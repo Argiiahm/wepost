@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+body {
+    font-family: "outfit";
+}
+
+::selection {
+    background-color: #000;
+    color: #fff;
+}
+
+@utility no-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
