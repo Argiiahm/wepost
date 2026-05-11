@@ -13,7 +13,7 @@ const Sidebar = () => {
     const token = localStorage.getItem("token");
     setLoading(true);
     try {
-      const res = await fetch(`${baseURL}/logout`, {
+      await fetch(`${baseURL}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

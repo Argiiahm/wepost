@@ -22,7 +22,7 @@ type Data = {
 type AuthContextType = {
   me: Data | null;
   getMe: () => Promise<void>;
-  loading: true;
+  loading: true | false;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);

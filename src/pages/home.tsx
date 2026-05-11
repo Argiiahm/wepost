@@ -10,6 +10,7 @@ import { Link } from "react-router";
 const Home = () => {
   const { me, loading: LoadingAuth } = useAuth();
   const { posts, loading: LoadingPosts } = usePosts();
+
   const loading = LoadingAuth || LoadingPosts;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
