@@ -20,7 +20,7 @@ const PostCard = ({
       key={id}
       className="md:border border-b border-zinc-900 sm:pb-6 md:rounded-md md:px-6 py-2 mt-2"
     >
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <img
           className="w-10 h-10 rounded-full"
           src={`https://ui-avatars.com/api/?name=${name}&background=random`}

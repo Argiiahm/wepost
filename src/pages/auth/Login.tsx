@@ -141,7 +141,7 @@ const Login = () => {
               </button>
             </div>
             <span className="text-zinc-400">
-              already have an account?{" "}
+              don't have an account?{" "}
               <Link
                 to="/register"
                 className="text-[#2d82bf] font-bold cursor-pointer"

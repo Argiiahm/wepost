@@ -1,11 +1,9 @@
 import { OrbitProgress } from "react-loading-indicators";
-import { formatDistanceToNow } from "date-fns";
-import PostCard from "../components/PostCard";
 import usePosts from "../hooks/usePosts";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import DialogPost from "../components/DialogPost";
-import { Link } from "react-router";
+import PostsPage from "../components/PostsPage";
 
 const Home = () => {
   const { me, loading: LoadingAuth } = useAuth();
@@ -16,7 +14,7 @@ const Home = () => {
 
   return (
     <section className="container max-w-3xl h-full mx-auto p-6">
-      <div className="h-full lg:border border-zinc-900 lg:p-6 rounded-4xl">
+      <div className="lg:fixed h-full w-full lg:max-w-2xl lg:border border-zinc-900 lg:p-6 rounded-4xl flex flex-col">
         {/* Create Post */}
         {me && (
           <div className="flex items-center justify-between text-white border-b  border-zinc-900 rounded-md md:px-6 mb-6">
@@ -46,21 +44,9 @@ const Home = () => {
             <span className="text-white">Loading content...</span>
           </div>
         ) : (
-          <div className="max-h-[100vh] overflow-y-auto no-scrollbar">
-            {posts.map((post) => (
-              <Link key={post.id} to={`/post/detail/${post.id}`}>
-                <PostCard
-                  id={post.id}
-                  name={post.user.name}
-                  createdAt={formatDistanceToNow(new Date(post.created_at), {
-                    addSuffix: true,
-                  })}
-                  title={post.title}
-                  content={post.content}
-                  category_name={post.category?.name || "wepost"}
-                />
-              </Link>
-            ))}
+          // Posts page
+          <div className="overflow-y-auto no-scrollbar flex-1 pb-14">
+            <PostsPage posts={posts} />
           </div>
         )}
         {/* Create Post Dialog */}

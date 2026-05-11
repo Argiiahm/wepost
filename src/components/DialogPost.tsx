@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import * as v from "valibot";
 import {
@@ -36,7 +35,6 @@ const DialogPost = ({ isDialogOpen, setIsDialogOpen }: Props) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string[]>([]);
-  const navigate = useNavigate();
   // handle input
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
