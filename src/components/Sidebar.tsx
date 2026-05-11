@@ -74,7 +74,9 @@ const Sidebar = () => {
             <NavLink
               to="/profile"
               className={({ isActive }) =>
-                `flex items-center gap-2 ${isActive ? "bg-zinc-900 p-2 rounded-md" : ""}`
+                `flex items-center gap-2 ${
+                  isActive ? "text-zinc-600 rounded-md" : ""
+                }`
               }
             >
               <UserRound size={24} />

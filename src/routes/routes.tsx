@@ -6,6 +6,7 @@ import PostDetail from "../pages/post/PostDetail";
 import ErrorPage from "../pages/errors/ErrorPage";
 import MainLayout from "../components/layouts/MainLayout";
 import GuestOnly from "./guestOnly";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <Home />
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <MainLayout>
+        <Profile />
       </MainLayout>
     ),
   },
