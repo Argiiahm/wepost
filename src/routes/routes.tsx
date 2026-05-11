@@ -7,6 +7,7 @@ import ErrorPage from "../pages/errors/ErrorPage";
 import MainLayout from "../components/layouts/MainLayout";
 import GuestOnly from "./guestOnly";
 import Profile from "../pages/Profile";
+import AuthOnly from "./authOnly";
 
 const router = createBrowserRouter([
   {
@@ -24,9 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: (
-      <MainLayout>
-        <Profile />
-      </MainLayout>
+      <AuthOnly>
+        <MainLayout>
+          <Profile />
+        </MainLayout>
+      </AuthOnly>
     ),
   },
   {
