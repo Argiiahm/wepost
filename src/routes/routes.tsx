@@ -6,8 +6,9 @@ import PostDetail from "../pages/post/PostDetail";
 import ErrorPage from "../pages/errors/ErrorPage";
 import MainLayout from "../components/layouts/MainLayout";
 import GuestOnly from "./guestOnly";
-import Profile from "../pages/Profile";
 import AuthOnly from "./authOnly";
+import Profile from "../pages/profiles/Profile";
+import UserProfile from "../pages/profiles/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -25,9 +26,17 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: (
+      <MainLayout>
+        <Profile />
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/profile/:id",
+    element: (
       <AuthOnly>
         <MainLayout>
-          <Profile />
+          <UserProfile />
         </MainLayout>
       </AuthOnly>
     ),

@@ -1,12 +1,12 @@
-import { OrbitProgress } from "react-loading-indicators";
-import useAuth from "../hooks/useAuth";
-import PostCard from "../components/PostCard";
-import { formatDistanceToNow } from "date-fns";
-import usePosts from "../hooks/usePosts";
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import usePosts from "../../hooks/usePosts";
+import { OrbitProgress } from "react-loading-indicators";
 import { Pen, Trash } from "lucide-react";
-import DialogUpdate from "../components/DialogUpdate";
-import DialogDelete from "../components/DialogDelete";
+import PostCard from "../../components/PostCard";
+import { formatDistanceToNow } from "date-fns";
+import DialogUpdate from "../../components/DialogUpdate";
+import DialogDelete from "../../components/DialogDelete";
 
 const Profile = () => {
   const { me, loading, getMe } = useAuth();
@@ -78,6 +78,7 @@ const Profile = () => {
                   </div>
 
                   <PostCard
+                    userId={me?.user.id}
                     username={me?.user.username}
                     title={post.title}
                     content={post.content}

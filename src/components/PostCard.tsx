@@ -1,5 +1,8 @@
+import { Link } from "react-router";
+
 type Props = {
   id: number;
+  userId: number;
   username: string;
   createdAt: string;
   title: string;
@@ -9,6 +12,7 @@ type Props = {
 
 const PostCard = ({
   id,
+  userId,
   username,
   createdAt,
   title,
@@ -21,14 +25,22 @@ const PostCard = ({
       className="md:border border-b border-zinc-900 sm:pb-6 md:rounded-md md:px-6 py-2 mt-2"
     >
       <div className="flex flex-wrap gap-2">
-        <img
-          className="w-10 h-10 rounded-full"
-          src={`https://ui-avatars.com/api/?name=${username}&background=random`}
-        />
-        <div>
-          <div className="text-white capitalize">{username}</div>
-          <div className="text-zinc-800 lowercase">{category_name}</div>
-        </div>
+        <Link
+          onClick={(e) => e.stopPropagation()}
+          className="flex gap-2"
+          to={`/profile/${userId}`}
+        >
+          <img
+            className="w-10 h-10 rounded-full"
+            src={`https://ui-avatars.com/api/?name=${username}&background=random`}
+          />
+          <div>
+            <div className="text-white capitalize hover:underline">
+              {username}
+            </div>
+            <div className="text-zinc-800 lowercase">{category_name}</div>
+          </div>
+        </Link>
         <span className="text-zinc-500">{createdAt}</span>
       </div>
       <h1 className="text-white text-xl font-bold mt-4">{title}</h1>

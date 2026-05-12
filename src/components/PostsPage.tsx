@@ -1,11 +1,12 @@
-import { Link } from "react-router";
 import PostCard from "./PostCard";
 import { formatDistanceToNow } from "date-fns";
 import { Bookmark, ThumbsUp } from "lucide-react";
+import { useNavigate } from "react-router";
 
 // type post
 type Posts = {
   user: {
+    id: number;
     username: string;
   };
   id: number;
@@ -18,25 +19,29 @@ type Posts = {
 };
 
 const PostsPage = ({ posts }: { posts: Posts[] }) => {
+  const navigate = useNavigate();
   return (
     <div>
       {posts.length > 0 ? (
         <>
           {posts.map((post) => (
-            <div key={post.id}>
-              <Link key={post.id} to={`/post/detail/${post.id}`}>
-                <PostCard
-                  key={post.id}
-                  id={post.id}
-                  username={post.user.username}
-                  createdAt={formatDistanceToNow(new Date(post.created_at), {
-                    addSuffix: true,
-                  })}
-                  title={post.title}
-                  content={post.content}
-                  category_name={post.category?.name || "wepost"}
-                />
-              </Link>
+            <div
+              onClick={() => navigate(`/post/detail/${post.id}`)}
+              key={post.id}
+              className="cursor-pointer"
+            >
+              <PostCard
+                key={post.id}
+                id={post.id}
+                userId={post.user.id}
+                username={post.user.username}
+                createdAt={formatDistanceToNow(new Date(post.created_at), {
+                  addSuffix: true,
+                })}
+                title={post.title}
+                content={post.content}
+                category_name={post.category?.name || "wepost"}
+              />
               <div className="flex justify-between items-center border-b border-zinc-900 py-4 px-4">
                 <div className="text-[14px] text-zinc-600">
                   <span>tertarik dengan postingan diatas?</span>

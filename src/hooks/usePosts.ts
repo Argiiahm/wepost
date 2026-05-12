@@ -3,6 +3,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type Post = {
   user: {
+    id: number;
     username: string;
   };
   id: number;
