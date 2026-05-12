@@ -2,9 +2,16 @@ import { OrbitProgress } from "react-loading-indicators";
 import useAuth from "../hooks/useAuth";
 import PostCard from "../components/PostCard";
 import { formatDistanceToNow } from "date-fns";
+import usePosts from "../hooks/usePosts";
+import { useEffect } from "react";
 
 const Profile = () => {
   const { me, loading } = useAuth();
+  const { fetchPosts } = usePosts();
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <section className="container max-w-3xl h-full mx-auto p-6">
@@ -27,17 +34,17 @@ const Profile = () => {
               <h1 className="text-2xl text-white font-bold">{me?.user.name}</h1>
               <span className="text-zinc-500">{me?.user.username}</span>
             </div>
-            <div>
-              <img
-                className="w-16 h-16 rounded-full"
-                src={`https://ui-avatars.com/api/?name=${me?.user.username}&background=random`}
-              />
-            </div>
+
+            <img
+              className="w-16 h-16 rounded-full"
+              src={`https://ui-avatars.com/api/?name=${me?.user.username}&background=random`}
+            />
           </div>
 
           {/* My posts */}
           <div className="mt-8">
             <h2 className="text-xl text-white font-bold mb-4">My Posts</h2>
+
             {me?.posts.length === 0 ? (
               <p className="text-zinc-500">No posts yet.</p>
             ) : (

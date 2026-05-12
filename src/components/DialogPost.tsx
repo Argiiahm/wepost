@@ -13,6 +13,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 type Props = {
   isDialogOpen: boolean;
   setIsDialogOpen: (open: boolean) => void;
+  fetchPosts: () => void;
 };
 
 // type form post
@@ -27,7 +28,7 @@ const schemaPost = v.object({
   content: v.pipe(v.string(), v.minLength(1, "content is required")),
 });
 
-const DialogPost = ({ isDialogOpen, setIsDialogOpen }: Props) => {
+const DialogPost = ({ isDialogOpen, setIsDialogOpen, fetchPosts }: Props) => {
   const token = localStorage.getItem("token");
   const [form, setForm] = useState<FormPost>({
     title: "",
@@ -79,6 +80,7 @@ const DialogPost = ({ isDialogOpen, setIsDialogOpen }: Props) => {
         toast.error("Failed create post");
         return;
       }
+      fetchPosts();
       toast.success("Post created");
       setForm({
         title: "",

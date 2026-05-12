@@ -7,7 +7,7 @@ import PostsPage from "../components/PostsPage";
 
 const Home = () => {
   const { me, loading: LoadingAuth } = useAuth();
-  const { posts, loading: LoadingPosts } = usePosts();
+  const { posts, loading: LoadingPosts, fetchPosts } = usePosts();
 
   const loading = LoadingAuth || LoadingPosts;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -53,6 +53,7 @@ const Home = () => {
         <DialogPost
           isDialogOpen={isDialogOpen}
           setIsDialogOpen={setIsDialogOpen}
+          fetchPosts={fetchPosts}
         />
       </div>
     </section>
