@@ -6,12 +6,14 @@ import usePosts from "../hooks/usePosts";
 import { useEffect, useState } from "react";
 import { Pen, Trash } from "lucide-react";
 import DialogUpdate from "../components/DialogUpdate";
+import DialogDelete from "../components/DialogDelete";
 
 const Profile = () => {
   const { me, loading, getMe } = useAuth();
   const { fetchPosts } = usePosts();
 
   const [selectedPost, setSelectedPost] = useState<any>(null);
+  const [selectedPostDelete, setSelectedPostDelete] = useState<any>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -58,7 +60,11 @@ const Profile = () => {
               me?.posts.map((post: any) => (
                 <div key={post.id}>
                   <div className="my-4 flex items-center justify-end gap-4 text-white">
-                    <button>
+                    <button
+                      onClick={() => {
+                        setSelectedPostDelete(post);
+                      }}
+                    >
                       <Trash size={20} />
                     </button>
 
@@ -96,6 +102,20 @@ const Profile = () => {
           setIsDialogOpen={(open) => {
             if (!open) {
               setSelectedPost(null);
+            }
+          }}
+          getMe={getMe}
+        />
+      )}
+
+      {/* Dialog Delete */}
+      {selectedPostDelete && (
+        <DialogDelete
+          post={selectedPostDelete}
+          isDialogOpen={!!selectedPostDelete}
+          setIsDialogOpen={(open) => {
+            if (!open) {
+              setSelectedPostDelete(null);
             }
           }}
           getMe={getMe}

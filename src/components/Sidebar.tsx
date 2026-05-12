@@ -7,6 +7,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Sidebar = () => {
   const { me, getMe } = useAuth();
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleLogout = async () => {
@@ -107,6 +108,7 @@ const Sidebar = () => {
       <DialogPost
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
+        getMe={getMe}
       />
     </section>
   );

@@ -98,7 +98,7 @@ const DialogUpdate = ({
           : [data.message || "Something went wrong"];
 
         setError(errors as string[]);
-        toast.error("Failed create post");
+        toast.error("Failed update post");
         return;
       }
       toast.success("Post updated successfully");

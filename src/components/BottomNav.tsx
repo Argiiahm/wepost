@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 import DialogPost from "../components/DialogPost";
 
 const BottomNav = () => {
-  const { me } = useAuth();
+  const { me, getMe } = useAuth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
     <>
@@ -57,6 +57,7 @@ const BottomNav = () => {
       <DialogPost
         isDialogOpen={isDialogOpen}
         setIsDialogOpen={setIsDialogOpen}
+        getMe={getMe}
       />
     </>
   );
