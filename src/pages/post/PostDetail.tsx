@@ -9,7 +9,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type Post = {
   user: {
-    name: string;
+    username: string;
   };
   id: number;
   title: string;
@@ -76,7 +76,7 @@ const PostDetail = () => {
               <PostCard
                 key={post.id}
                 id={post.id}
-                name={post.user.name}
+                username={post.user.username}
                 createdAt={formatDistanceToNow(new Date(post.created_at), {
                   addSuffix: true,
                 })}

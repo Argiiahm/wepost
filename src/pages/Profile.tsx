@@ -6,11 +6,12 @@ import usePosts from "../hooks/usePosts";
 import { useEffect } from "react";
 
 const Profile = () => {
-  const { me, loading } = useAuth();
+  const { me, loading, getMe } = useAuth();
   const { fetchPosts } = usePosts();
 
   useEffect(() => {
     fetchPosts();
+    getMe();
   }, []);
 
   return (
@@ -51,7 +52,7 @@ const Profile = () => {
               me?.posts.map((post: any) => (
                 <PostCard
                   key={post.id}
-                  name={me?.user.name}
+                  username={me?.user.username}
                   title={post.title}
                   content={post.content}
                   createdAt={formatDistanceToNow(new Date(post.created_at), {

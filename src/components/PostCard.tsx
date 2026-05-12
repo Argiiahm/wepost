@@ -1,6 +1,6 @@
 type Props = {
   id: number;
-  name: string;
+  username: string;
   createdAt: string;
   title: string;
   content: string;
@@ -9,7 +9,7 @@ type Props = {
 
 const PostCard = ({
   id,
-  name,
+  username,
   createdAt,
   title,
   content,
@@ -23,10 +23,10 @@ const PostCard = ({
       <div className="flex flex-wrap gap-2">
         <img
           className="w-10 h-10 rounded-full"
-          src={`https://ui-avatars.com/api/?name=${name}&background=random`}
+          src={`https://ui-avatars.com/api/?name=${username}&background=random`}
         />
         <div>
-          <div className="text-white capitalize">{name}</div>
+          <div className="text-white capitalize">{username}</div>
           <div className="text-zinc-800 lowercase">{category_name}</div>
         </div>
         <span className="text-zinc-500">{createdAt}</span>

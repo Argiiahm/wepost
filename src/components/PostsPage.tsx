@@ -6,7 +6,6 @@ import { Bookmark, ThumbsUp } from "lucide-react";
 // type post
 type Posts = {
   user: {
-    name: string;
     username: string;
   };
   id: number;
@@ -24,11 +23,12 @@ const PostsPage = ({ posts }: { posts: Posts[] }) => {
       {posts.length > 0 ? (
         <>
           {posts.map((post) => (
-            <div>
+            <div key={post.id}>
               <Link key={post.id} to={`/post/detail/${post.id}`}>
                 <PostCard
+                  key={post.id}
                   id={post.id}
-                  name={post.user.username}
+                  username={post.user.username}
                   createdAt={formatDistanceToNow(new Date(post.created_at), {
                     addSuffix: true,
                   })}
