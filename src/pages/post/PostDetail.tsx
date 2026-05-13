@@ -6,6 +6,7 @@ import ErrorPage from "../errors/ErrorPage";
 import { useNavigate } from "react-router";
 import { formatDistanceToNow } from "date-fns";
 import { ArrowLeft, Bookmark, ThumbsUp } from "lucide-react";
+import useLike from "../../hooks/useLike";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type Post = {
@@ -24,9 +25,11 @@ type Post = {
 
 const PostDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const { likedPosts, handlePostLike } = useLike();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -98,7 +101,16 @@ const PostDetail = () => {
                 <span>tertarik dengan postingan diatas?</span>
               </div>
               <div className="text-white flex items-center gap-2">
-                <ThumbsUp size={20} />
+                <ThumbsUp
+                  color={likedPosts.includes(post!.id) ? "red" : "white"}
+                  fill={likedPosts.includes(post!.id) ? "red" : "none"}
+                  // stop event propagation to prevent navigating to post detail when clicking like button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePostLike(post!.id);
+                  }}
+                  size={20}
+                />
                 <Bookmark size={20} />
               </div>
             </div>

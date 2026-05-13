@@ -2,6 +2,7 @@ import PostCard from "./PostCard";
 import { formatDistanceToNow } from "date-fns";
 import { Bookmark, ThumbsUp } from "lucide-react";
 import { useNavigate } from "react-router";
+import useLike from "../hooks/useLike";
 
 // type post
 type Posts = {
@@ -20,6 +21,7 @@ type Posts = {
 
 const PostsPage = ({ posts }: { posts: Posts[] }) => {
   const navigate = useNavigate();
+  const { likedPosts, handlePostLike } = useLike();
   return (
     <div>
       {posts.length > 0 ? (
@@ -47,7 +49,16 @@ const PostsPage = ({ posts }: { posts: Posts[] }) => {
                   <span>tertarik dengan postingan diatas?</span>
                 </div>
                 <div className="text-white flex items-center gap-2">
-                  <ThumbsUp size={20} />
+                  <ThumbsUp
+                    color={likedPosts.includes(post!.id) ? "red" : "white"}
+                    fill={likedPosts.includes(post!.id) ? "red" : "none"}
+                    // stop event propagation to prevent navigating to post detail when clicking like button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePostLike(post!.id);
+                    }}
+                    size={20}
+                  />
                   <Bookmark size={20} />
                 </div>
               </div>

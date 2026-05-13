@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { OrbitProgress } from "react-loading-indicators";
 import { useNavigate, useParams } from "react-router";
 import PostCard from "../../components/PostCard";
+import useLike from "../../hooks/useLike";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type UserProfileType = {
@@ -22,6 +23,8 @@ type UserProfileType = {
 const UserProfile = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const { likedPosts, handlePostLike } = useLike();
+
   const navigate = useNavigate();
 
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
@@ -32,8 +35,6 @@ const UserProfile = () => {
       try {
         const res = await fetch(`${baseURL}/user/${id}`);
         const data = await res.json();
-        console.log(data);
-
         setUserProfile(data.user);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -92,8 +93,8 @@ const UserProfile = () => {
               <p className="text-zinc-500">No posts yet.</p>
             ) : (
               userProfile?.posts.map((post: any) => (
-                <div>
-                  <div key={post.id}>
+                <div key={post.id}>
+                  <div>
                     <PostCard
                       userId={userProfile.id}
                       username={userProfile?.username}
@@ -114,7 +115,16 @@ const UserProfile = () => {
                       <span>tertarik dengan postingan diatas?</span>
                     </div>
                     <div className="text-white flex items-center gap-2">
-                      <ThumbsUp size={20} />
+                      <ThumbsUp
+                        color={likedPosts.includes(post!.id) ? "red" : "white"}
+                        fill={likedPosts.includes(post!.id) ? "red" : "none"}
+                        // stop event propagation to prevent navigating to post detail when clicking like button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handlePostLike(post!.id);
+                        }}
+                        size={20}
+                      />
                       <Bookmark size={20} />
                     </div>
                   </div>
