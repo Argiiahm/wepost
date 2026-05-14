@@ -10,6 +10,7 @@ import AuthOnly from "./authOnly";
 import Profile from "../pages/profiles/Profile";
 import UserProfile from "../pages/profiles/UserProfile";
 import LikeProvider from "../providers/LikeProvider";
+import FavProvider from "../providers/FavProvider";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,9 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <LikeProvider>
-          <Home />
+          <FavProvider>
+            <Home />
+          </FavProvider>
         </LikeProvider>
       </MainLayout>
     ),
@@ -40,7 +43,9 @@ const router = createBrowserRouter([
       <AuthOnly>
         <MainLayout>
           <LikeProvider>
-            <UserProfile />
+            <FavProvider>
+              <UserProfile />
+            </FavProvider>
           </LikeProvider>
         </MainLayout>
       </AuthOnly>
@@ -67,7 +72,9 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <LikeProvider>
-          <PostDetail />
+          <FavProvider>
+            <PostDetail />
+          </FavProvider>
         </LikeProvider>
       </MainLayout>
     ),

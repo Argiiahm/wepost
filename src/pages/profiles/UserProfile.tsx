@@ -5,6 +5,7 @@ import { OrbitProgress } from "react-loading-indicators";
 import { useNavigate, useParams } from "react-router";
 import PostCard from "../../components/PostCard";
 import useLike from "../../hooks/useLike";
+import useFav from "../../hooks/useFav";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type UserProfileType = {
@@ -24,6 +25,7 @@ const UserProfile = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const { likedPosts, handlePostLike } = useLike();
+  const { FavPosts, handleFavPosts } = useFav();
 
   const navigate = useNavigate();
 
@@ -125,7 +127,15 @@ const UserProfile = () => {
                         }}
                         size={20}
                       />
-                      <Bookmark size={20} />
+                      <Bookmark
+                        fill={FavPosts.includes(post!.id) ? "white" : "none"}
+                        // stop event propagation to prevent navigating to post detail when clicking like button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleFavPosts(post!.id);
+                        }}
+                        size={20}
+                      />
                     </div>
                   </div>
                 </div>

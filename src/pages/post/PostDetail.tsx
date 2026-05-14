@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { formatDistanceToNow } from "date-fns";
 import { ArrowLeft, Bookmark, ThumbsUp } from "lucide-react";
 import useLike from "../../hooks/useLike";
+import useFav from "../../hooks/useFav";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 type Post = {
@@ -29,6 +30,8 @@ const PostDetail = () => {
   const [loading, setLoading] = useState(false);
 
   const { likedPosts, handlePostLike } = useLike();
+  const { FavPosts, handleFavPosts } = useFav();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -111,7 +114,15 @@ const PostDetail = () => {
                   }}
                   size={20}
                 />
-                <Bookmark size={20} />
+                <Bookmark
+                  fill={FavPosts.includes(post!.id) ? "white" : "none"}
+                  // stop event propagation to prevent navigating to post detail when clicking like button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFavPosts(post!.id);
+                  }}
+                  size={20}
+                />
               </div>
             </div>
           </div>
